@@ -68,3 +68,21 @@ The hybrid model should incorporate rating standard deviation as a
 confidence signal. High std films require stronger user-movie similarity
 evidence before being recommended. This is implemented in the
 content-based filtering layer using genre specificity weighting.
+
+## Finding 4 — no unrated movies, but popularity is highly skewed
+
+**What the data shows:**
+Every movie in the dataset has at least one rating — zero cold start
+movies. However popularity is heavily skewed — Star Wars has 583
+ratings while many movies have fewer than 5. The most popular movie
+has 116 times more ratings than the median movie.
+
+**What it means:**
+Collaborative filtering will work for all movies but will be more
+reliable for popular films with many ratings. Obscure films with
+fewer than 20 ratings will have unreliable similarity scores.
+
+**ML implication:**
+A minimum rating threshold of 20 will be applied when evaluating
+collaborative filtering recommendations. Movies below this threshold
+will rely on content-based filtering instead.
