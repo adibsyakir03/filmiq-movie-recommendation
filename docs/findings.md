@@ -47,3 +47,24 @@ collaborative filtering handles active users.
 The cold start problem affects 21% of users directly. Minimum
 rating threshold of 20 ratings will be applied for collaborative
 filtering evaluation, excluding light users from CF metrics.
+
+## Finding 3 — quality vs controversy: two types of highly rated films
+
+**What the data shows:**
+The top rated films (B1) show low standard deviations (0.73–0.83)
+confirming broad consensus. The most controversial films (B2) show
+standard deviations above 1.30 — nearly double — with average ratings
+clustering around 3.0 indicating deeply split opinions.
+
+**What it means:**
+Two distinct recommendation risk profiles exist. Consensus films like
+Schindler's List and Casablanca are safe recommendations for almost
+any user. Divisive films like Koyaanisqatsi and Natural Born Killers
+require precise user matching — only recommend to users with
+demonstrated taste for that specific style.
+
+**ML implication:**
+The hybrid model should incorporate rating standard deviation as a
+confidence signal. High std films require stronger user-movie similarity
+evidence before being recommended. This is implemented in the
+content-based filtering layer using genre specificity weighting.
