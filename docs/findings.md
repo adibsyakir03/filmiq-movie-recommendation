@@ -87,26 +87,29 @@ A minimum rating threshold of 20 will be applied when evaluating
 collaborative filtering recommendations. Movies below this threshold
 will rely on content-based filtering instead.
 
-## Finding 5 — War and Drama rate highest, Horror rates lowest
+## Finding 5 — Film Noir rates highest despite being the rarest genre
 
 **What the data shows:**
-War films have the highest average rating at 3.82 followed by Drama
-at 3.69 and Documentary at 3.67. Horror has the lowest average
-rating at 3.29. Comedy also rates below average at 3.39 despite
-being the second most common genre.
+Film Noir has the highest average rating at 3.92 despite having only
+24 movies in the dataset. War follows at 3.82, then Drama at 3.69.
+Horror rates lowest at 3.29. Comedy rates below average at 3.39
+despite being the second most common genre with 505 films.
 
 **What it means:**
-Genre is a strong signal for expected rating. War and Documentary
-films attract viewers with genuine interest in the subject matter,
-producing higher and more consistent ratings. Horror and Comedy
-attract casual viewers with more variable reactions.
+Film Noir attracts a small but highly engaged audience of serious
+cinephiles who rate consistently and thoughtfully. This is the niche
+quality effect — passionate audiences produce higher average ratings
+than broad mainstream genres. War films benefit from similar dynamics.
+Horror and Comedy attract casual viewers with more variable reactions,
+pulling averages down.
 
 **ML implication:**
-Genre preference is a key feature for content-based filtering.
-A user who consistently rates War films above 4.0 is very different
-from one who rates Horror films above 4.0. The genre vector for
-each user will be weighted by their rating history per genre,
-not just by which genres they have watched.
+Genre is a strong predictor of expected rating but must be weighted
+by genre frequency. Film Noir should not dominate recommendations
+simply because its average rating is highest — it needs to be matched
+to users who have demonstrated appreciation for classic or arthouse
+cinema. The content-based model handles this through user genre
+affinity scores rather than raw genre averages.
 
 ## Finding 6 — age predicts rating generosity, gender does not
 
