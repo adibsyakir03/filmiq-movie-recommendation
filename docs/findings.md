@@ -107,3 +107,25 @@ A user who consistently rates War films above 4.0 is very different
 from one who rates Horror films above 4.0. The genre vector for
 each user will be weighted by their rating history per genre,
 not just by which genres they have watched.
+
+## Finding 6 — age predicts rating generosity, gender does not
+
+**What the data shows:**
+Male and female users rate identically at 3.53 average. However age
+shows a clear pattern — users under 18 average 3.42 while users 55+
+average 3.65. Students make up the largest occupation group at 196
+users. Educators rate highest at 3.67 among occupations.
+
+**What it means:**
+Gender is not a useful feature for rating prediction but age is.
+The 0.23 point gap between youngest and oldest users represents a
+meaningful difference in rating behaviour. A personalised model must
+account for each user's individual rating baseline rather than
+assuming all users use the scale the same way.
+
+**ML implication:**
+User average rating will be used as a normalisation factor in the
+collaborative filtering model. Rather than predicting raw ratings,
+the model will predict deviations from each user's personal average.
+This technique — called mean-centering — significantly improves
+recommendation accuracy for datasets with user rating bias.
