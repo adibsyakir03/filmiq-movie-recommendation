@@ -129,3 +129,25 @@ collaborative filtering model. Rather than predicting raw ratings,
 the model will predict deviations from each user's personal average.
 This technique — called mean-centering — significantly improves
 recommendation accuracy for datasets with user rating bias.
+
+## Finding 7 — only 36% of movies and 39% of users are CF-ready
+
+**What the data shows:**
+35.9% of movies have 50+ ratings suitable for reliable collaborative
+filtering. 44.1% of movies have fewer than 20 ratings. On the user
+side, 21.1% are light users with fewer than 30 ratings — insufficient
+for reliable CF similarity calculation.
+
+**What it means:**
+A pure collaborative filtering system would fail to recommend 44% of
+the movie catalogue and would produce poor recommendations for 21%
+of users. This quantifies exactly why the hybrid model is necessary —
+not as a theoretical improvement but as a practical requirement.
+
+**ML implication:**
+The hybrid model architecture assigns weights dynamically:
+- High CF weight for active users rating well-known movies
+- High content-based weight for light users or obscure movies
+- Equal blending for moderate cases
+This adaptive weighting is the key design decision of the FilmIQ
+hybrid model.
