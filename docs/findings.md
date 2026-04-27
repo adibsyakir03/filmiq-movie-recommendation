@@ -111,6 +111,12 @@ to users who have demonstrated appreciation for classic or arthouse
 cinema. The content-based model handles this through user genre
 affinity scores rather than raw genre averages.
 
+**Note on methodology:** SQL and Python calculations produce slightly
+different genre averages due to differences in how multi-genre movie
+ratings are aggregated. Film Noir ranks first in Python (3.92) and
+War ranks first in SQL (3.82). Both methods confirm the same pattern —
+niche genres with engaged audiences rate higher than mainstream genres.
+
 ## Finding 6 — age predicts rating generosity, gender does not
 
 **What the data shows:**
