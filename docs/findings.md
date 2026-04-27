@@ -86,3 +86,24 @@ fewer than 20 ratings will have unreliable similarity scores.
 A minimum rating threshold of 20 will be applied when evaluating
 collaborative filtering recommendations. Movies below this threshold
 will rely on content-based filtering instead.
+
+## Finding 5 — War and Drama rate highest, Horror rates lowest
+
+**What the data shows:**
+War films have the highest average rating at 3.82 followed by Drama
+at 3.69 and Documentary at 3.67. Horror has the lowest average
+rating at 3.29. Comedy also rates below average at 3.39 despite
+being the second most common genre.
+
+**What it means:**
+Genre is a strong signal for expected rating. War and Documentary
+films attract viewers with genuine interest in the subject matter,
+producing higher and more consistent ratings. Horror and Comedy
+attract casual viewers with more variable reactions.
+
+**ML implication:**
+Genre preference is a key feature for content-based filtering.
+A user who consistently rates War films above 4.0 is very different
+from one who rates Horror films above 4.0. The genre vector for
+each user will be weighted by their rating history per genre,
+not just by which genres they have watched.
