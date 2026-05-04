@@ -160,3 +160,29 @@ The hybrid model architecture assigns weights dynamically:
 - Equal blending for moderate cases
 This adaptive weighting is the key design decision of the FilmIQ
 hybrid model.
+
+## Finding 8 — CF models reveal two distinct recommendation styles
+
+**What the data shows:**
+User-based CF (RMSE=1.015, MAE=0.821) recommends universally
+acclaimed films — Casablanca, Schindler's List, Rear Window.
+Item-based CF (RMSE=0.972, MAE=0.741) recommends niche arthouse
+films matching specific viewing patterns — City of Lost Children,
+Trainspotting, Chungking Express.
+
+Item-based CF outperforms user-based CF on both RMSE and MAE,
+consistent with published recommendation research showing item
+similarities are more stable than user similarities.
+
+**What it means:**
+The two approaches are complementary rather than competing.
+User-based CF captures broad taste alignment while item-based
+CF captures specific viewing style. A user who rated Shanghai
+Triad highly gets very different but equally valid recommendations
+from each method.
+
+**ML implication:**
+The hybrid model blends both approaches. For users with many
+ratings, item-based CF dominates. For users with few ratings,
+user-based CF provides more stable recommendations by leveraging
+the collective behaviour of similar users.
