@@ -158,30 +158,23 @@ print('User affinity profiles saved')
 
 # ------------------------------------------------------------
 # STEP 5 — TRAIN/TEST SPLIT
-# Use a simple timestamp-based split
-# All ratings before a cutoff go to train, after to test
-# This simulates real-world deployment — train on past, test on future
-# ------------------------------------------------------------
+# Use random split instead of timestamp-based
+# MovieLens timestamps are too clustered for chronological split
 print('\nCreating train/test split...')
 
-ratings['rated_at'] = pd.to_datetime(ratings['rated_at'])
-ratings_sorted = ratings.sort_values('rated_at').dropna(
-    subset=['rated_at'])
+from sklearn.model_selection import train_test_split
 
-# 80% train, 20% test
-split_idx = int(len(ratings_sorted) * 0.8)
-train = ratings_sorted.iloc[:split_idx]
-test  = ratings_sorted.iloc[split_idx:]
+train, test = train_test_split(
+    ratings,
+    test_size=0.2,
+    random_state=42,
+    stratify=ratings['user_id']  # ensure each user appears in both
+)
 
 print(f'Train set: {len(train):,} ratings')
 print(f'Test set:  {len(test):,} ratings')
-print(f'Train date range: '
-      f'{train["rated_at"].min()} to {train["rated_at"].max()}')
-print(f'Test date range:  '
-      f'{test["rated_at"].min()} to {test["rated_at"].max()}')
 
-# Only keep test users and movies that appear in train
-# (cold start items cannot be evaluated fairly)
+# Filter cold start from test
 train_users  = set(train['user_id'])
 train_movies = set(train['movie_id'])
 test_filtered = test[
@@ -189,8 +182,7 @@ test_filtered = test[
     test['movie_id'].isin(train_movies)
 ]
 
-print(f'Test set after filtering cold start: '
-      f'{len(test_filtered):,} ratings')
+print(f'Test set after filtering: {len(test_filtered):,} ratings')
 
 train.to_csv('data/processed/train.csv', index=False)
 test_filtered.to_csv('data/processed/test.csv', index=False)
