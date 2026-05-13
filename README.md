@@ -115,7 +115,44 @@ filmiq-movie-recommendation/
 
 ## Key findings
 
-> *(To be completed after analysis)*
+| # | Finding | Result |
+|---|---|---|
+| 1 | Dataset size | 100,000 ratings, 1,682 movies, 943 users |
+| 2 | Matrix sparsity | 6.3% density — 93.7% of ratings are missing |
+| 3 | Positivity bias | 55% of ratings are 4★ or 5★ |
+| 4 | Best individual model | SVD K=100, RMSE=0.552 (+50.3% over baseline) |
+| 5 | Hybrid model | RMSE=0.710 (+36.2% over baseline) |
+| 6 | Precision@10 | 69.7% — 7 of 10 recommendations are relevant |
+| 7 | Recall@10 | 81.1% — finds 81% of movies user would enjoy |
+| 8 | Primary latent factor | Mainstream vs arthouse preference |
+| 9 | Cold start solution | Content-based filtering by genre |
+| 10 | Light user handling | Content-based weight = 60% in hybrid |
+
+The core conclusion: **no single recommendation approach is optimal for all users.**
+SVD delivers highest accuracy for active users. Content-based filtering handles cold
+start cases. The adaptive hybrid model combines both — weighting each component by
+user activity level. This architecture mirrors production recommenders at Netflix,
+Spotify and YouTube.
+
+## Charts
+
+### Model comparison
+![Model comparison](outputs/charts/py14_model_comparison.png)
+
+### Adaptive hybrid weights
+![Adaptive weights](outputs/charts/py15_adaptive_weights.png)
+
+### Rating distribution
+![Rating distribution](outputs/charts/py01_rating_distribution.png)
+
+### Movie popularity vs quality
+![Popularity vs quality](outputs/charts/py03_popularity_vs_quality.png)
+
+### Genre ratings
+![Genre ratings](outputs/charts/py04_genre_ratings.png)
+
+### Matrix sparsity
+![Matrix sparsity](outputs/charts/py05_matrix_sparsity.png)
 
 ---
 
@@ -156,7 +193,7 @@ python python/06_hybrid_model.py
 ## Author
 
 **Adib Syakir**  
-Aspiring Data Scientist  
+Aspiring Data Scientist | Actuarial Analyst
 [LinkedIn](https://www.linkedin.com/in/adib-syakir-b05605336)
 
 ---
